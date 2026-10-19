@@ -29,6 +29,14 @@ main{max-width:760px;margin:0 auto;padding:10px 14px 24px}.card{background:#fff;
 #dashboard .muted{line-height:1.55}
 @media(max-width:440px){.dash-hero{padding:20px 16px}.dash-hero h2{font-size:23px}.dash-stats{gap:7px}.dash-stat{padding:11px 8px}.dash-stat strong{font-size:17px}.dash-stat span{font-size:10px}}
 
+
+/* Restore the worker character on the actual dashboard */
+.dash-hero{padding-right:112px;min-height:142px}
+.dash-worker{position:absolute!important;z-index:2!important;right:17px;bottom:8px;font-size:76px;line-height:1;filter:drop-shadow(0 8px 7px #071b3655);transform-origin:bottom center;animation:workerFloat 3.2s ease-in-out infinite;pointer-events:none}
+.dash-worker:after{content:"₹0 शुल्क";position:absolute;right:-4px;bottom:0;transform:translateY(45%);white-space:nowrap;background:#ffbd3d;color:#382600;font-size:11px;font-weight:950;padding:6px 9px;border-radius:9px;box-shadow:0 4px 12px #071b3628}
+.dash-hero .eyebrow,.dash-hero h2,.dash-hero p{max-width:100%}
+@media(max-width:440px){.dash-hero{padding-right:96px;min-height:150px}.dash-worker{right:10px;bottom:13px;font-size:60px}.dash-hero h2{max-width:100%;overflow-wrap:anywhere}.dash-hero p{font-size:12px}}
+
 </style>
 </head>
 <body>
@@ -62,7 +70,7 @@ main{max-width:760px;margin:0 auto;padding:10px 14px 24px}.card{background:#fff;
 </section>
 
 <section id="dashboard" class="hidden">
-<div class="dash-hero"><div class="eyebrow">KAAM DAAR · आपका कार्यक्षेत्र</div><h2 id="welcome">नमस्ते</h2><p id="roleLabel">हुनर से रोज़गार तक — आपके आसपास के काम, एक ही जगह।</p></div>
+<div class="dash-hero"><div class="eyebrow">KAAM DAAR · आपका कार्यक्षेत्र</div><h2 id="welcome">नमस्ते</h2><p id="roleLabel">हुनर से रोज़गार तक — आपके आसपास के काम, एक ही जगह।</p><div class="dash-worker" aria-label="काम दार का चित्र" role="img">👷🏽‍♂️</div></div>
 <div class="dash-stats"><div class="dash-stat"><strong>₹0</strong><span>प्लेटफ़ॉर्म शुल्क</span></div><div class="dash-stat"><strong>10 किमी</strong><span>नज़दीकी काम</span></div><div class="dash-stat"><strong>2 जिले</strong><span>पायलट क्षेत्र</span></div></div>
 <div class="card"><div class="row" style="align-items:center"><div><h2>आपका खाता</h2><div class="muted">अमेठी और सुल्तानपुर में काम और लोगों से जुड़ें।</div></div><div style="max-width:140px"><button class="ghost" id="logout">लॉगआउट</button></div></div></div>
 <div id="contractorPanel" class="card hidden">
