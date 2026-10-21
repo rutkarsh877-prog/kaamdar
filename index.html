@@ -120,8 +120,76 @@ $("postJob").onclick=async()=>{if(!profile||profile.role!=="contractor")return;c
 async function loadJobs(){if(!profile)return;const host=$("jobsList");host.innerHTML="<p class='muted'>काम लोड हो रहे हैं…</p>";if(demoMode){let jobs=demoJobs.filter(j=>j.status==="open"&&j.work_date>=dateToday());if(profile.role==="contractor")jobs=demoJobs.filter(j=>j.contractor_id===user.id);else jobs=jobs.filter(j=>j.district===profile.district&&dist(coords.latitude,coords.longitude,j.latitude,j.longitude)<=10).map(j=>({...j,distance:dist(coords.latitude,coords.longitude,j.latitude,j.longitude)}));renderJobs(jobs,host);return;}let q=db.from("jobs").select("*").order("work_date",{ascending:true}).limit(50);if(profile.role==="contractor")q=q.eq("contractor_id",user.id);else q=q.eq("status","open").gte("work_date",dateToday()).eq("district",profile.district);const {data,error}=await q;if(error){host.textContent="काम लोड नहीं हुए: "+error.message;return;}let jobs=data||[];if(profile.role==="worker"&&coords){jobs=jobs.map(j=>({...j,distance:dist(coords.latitude,coords.longitude,j.latitude,j.longitude)})).filter(j=>j.distance<=10).sort((a,b)=>a.distance-b.distance);}renderJobs(jobs,host);}
 function renderJobs(jobs,host){if(!jobs.length){host.innerHTML="<p class='muted'>अभी कोई matching काम नहीं मिला। बाद में फिर देखें।</p>";return;}host.innerHTML="";for(const j of jobs){const div=document.createElement("div");div.className="job";const distance=j.distance==null?"":`<span class="pill">${j.distance.toFixed(1)} किमी दूर</span>`;const maps=`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(j.latitude+","+j.longitude)}&travelmode=driving`;div.innerHTML=`<h3></h3><div class="pay"></div><span class="pill"></span><span class="pill"></span><span class="pill"></span>${distance}<p class="muted"></p><a target="_blank" rel="noopener" href="${maps}">Google Maps पर रास्ता देखें</a><div class="action"></div>`;div.querySelector("h3").textContent=j.title;div.querySelector(".pay").textContent="₹"+j.wage_inr+" / दिन";const pills=div.querySelectorAll(".pill");pills[0].textContent=j.skill;pills[1].textContent=j.workers_needed+" लोग चाहिए";pills[2].textContent=j.work_date+" · "+j.district;div.querySelector("p").textContent=j.location_text+(j.description?" — "+j.description:"");if(profile.role==="worker"){const b=document.createElement("button");b.textContent="यह काम स्वीकार करें";b.onclick=()=>applyJob(j.id);div.querySelector(".action").appendChild(b);}host.appendChild(div);}}
 function dist(lat1,lon1,lat2,lon2){const r=x=>x*Math.PI/180;const dlat=r(lat2-lat1),dlon=r(lon2-lon1);const a=Math.sin(dlat/2)**2+Math.cos(r(lat1))*Math.cos(r(lat2))*Math.sin(dlon/2)**2;return 6371*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));}
-async function applyJob(jobId){if(demoMode){const j=demoJobs.find(x=>x.id===jobId);if(!j){say("डेमो काम नहीं मिला।","error");return;}if(!j.applications)j.applications=[];if(j.applications.includes(user.id)){say("आप इस डेमो काम पर पहले आवेदन कर चुके हैं।","error");return;}j.applications.push(user.id);say("","");await loadJobs();await loadApplications();return;}const {error}=await db.from("job_applications").insert({job_id:jobId,worker_id:user.id,status:"accepted"});if(error){say("काम स्वीकार नहीं हुआ: "+error.message,"error");return;}say("काम स्वीकार करने का आवेदन सेव हो गया।","ok");await loadJobs();await loadApplications();}
-async function loadApplications(){const host=$("myApplications");if(demoMode){const rows=demoJobs.filter(j=>profile.role==="worker"?(j.applications||[]).includes(user.id):j.contractor_id===user.id&&((j.applications||[]).length>0));if(!rows.length){host.textContent="अभी कोई आवेदन नहीं है।";return;}host.innerHTML="";for(const j of rows){const d=document.createElement("div");d.className="job";d.textContent=`${j.title} · ₹${j.wage_inr}/दिन · ${j.work_date} · आवेदन: ${(j.applications||[]).length}`;host.appendChild(d);}return;}let q;if(profile.role==="worker"){q=db.from("job_applications").select("id,status,created_at,jobs(title,wage_inr,work_date,location_text)").eq("worker_id",user.id).order("created_at",{ascending:false});}else{q=db.from("job_applications").select("id,status,created_at,jobs!inner(title,wage_inr,work_date,location_text,contractor_id)").eq("jobs.contractor_id",user.id).order("created_at",{ascending:false});}const {data,error}=await q;if(error){host.textContent="आवेदन लोड नहीं हुए: "+error.message;return;}if(!data?.length){host.textContent="अभी कोई आवेदन नहीं है।";return;}host.innerHTML="";for(const a of data){const d=document.createElement("div");d.className="job";const j=a.jobs||{};d.textContent=`${j.title||"काम"} · ₹${j.wage_inr||0}/दिन · ${j.work_date||""} · स्थिति: ${a.status}`;host.appendChild(d);}}
+async function applyJob(jobId){
+ if(profile?.role!=="worker"){say("काम के लिए आवेदन केवल काम दार कर सकते हैं।","error");return;}
+ if(demoMode){
+  const j=demoJobs.find(x=>x.id===jobId);if(!j){say("डेमो काम नहीं मिला।","error");return;}
+  if(!j.applications)j.applications=[];
+  if(j.applications.some(a=>(typeof a==="string"?a:a.worker_id)===user.id)){say("आप इस काम पर पहले आवेदन कर चुके हैं।","error");return;}
+  j.applications.push({worker_id:user.id,status:"pending",created_at:new Date().toISOString()});
+  say("आवेदन भेज दिया गया। ठेकेदार की प्रतिक्रिया आपके आवेदन में दिखेगी।","ok");await loadJobs();await loadApplications();return;
+ }
+ const {error}=await db.from("job_applications").insert({job_id:jobId,worker_id:user.id,status:"pending"});
+ if(error){say("आवेदन भेजा नहीं जा सका: "+error.message,"error");return;}
+ say("आवेदन भेज दिया गया। ठेकेदार की प्रतिक्रिया आपके आवेदन में दिखेगी।","ok");await loadJobs();await loadApplications();
+}
+async function setApplicationStatus(applicationId, workerId, status, jobId){
+ if(!["accepted","rejected"].includes(status))return;
+ if(demoMode){
+  const job=demoJobs.find(j=>j.id===jobId);
+  const app=job?.applications?.find(a=>typeof a!=="string"&&a.worker_id===workerId);
+  if(app){app.status=status;say(status==="accepted"?"काम दार का आवेदन स्वीकार किया गया।":"काम दार का आवेदन अस्वीकार किया गया।","ok");await loadApplications();}
+  return;
+ }
+ const {error}=await db.from("job_applications").update({status}).eq("id",applicationId);
+ if(error){say("स्थिति अपडेट नहीं हुई: "+error.message+" — Supabase RLS/UPDATE policy जाँचें।","error");return;}
+ say(status==="accepted"?"आवेदन स्वीकार किया गया।":"आवेदन अस्वीकार किया गया।","ok");await loadApplications();
+}
+function statusLabel(status){return status==="accepted"?"स्वीकार किया गया":status==="rejected"?"अस्वीकार किया गया":status==="pending"?"प्रतीक्षा में":status||"स्थिति उपलब्ध नहीं";}
+async function loadApplications(){
+ const host=$("myApplications");
+ if(!profile||!user){host.textContent="लॉगिन के बाद आवेदन यहाँ दिखेंगे।";return;}
+ if(demoMode){
+  const rows=[];
+  for(const j of demoJobs){for(const raw of (j.applications||[])){const a=typeof raw==="string"?{worker_id:raw,status:"pending"}:raw;
+   if(profile.role==="worker"&&a.worker_id===user.id)rows.push({j,a});
+   if(profile.role==="contractor"&&j.contractor_id===user.id)rows.push({j,a});
+  }}
+  if(!rows.length){host.textContent="अभी कोई आवेदन नहीं है।";return;}
+  host.innerHTML="";
+  for(const row of rows){const j=row.j,a=row.a,d=document.createElement("div");d.className="job";
+   const title=document.createElement("h3");title.textContent=j.title;
+   const meta=document.createElement("p");meta.className="muted";meta.textContent="₹"+j.wage_inr+"/दिन · "+j.work_date+" · स्थिति: "+statusLabel(a.status);
+   d.append(title,meta);
+   if(profile.role==="contractor"){
+    const who=document.createElement("p");who.className="muted";who.textContent="काम दार डेमो प्रोफ़ाइल: "+a.worker_id;d.appendChild(who);
+    if(a.status==="pending"){for(const pair of [["Accept करें","accepted"],["Reject करें","rejected"]]){const b=document.createElement("button");b.textContent=pair[0];if(pair[1]!=="accepted")b.className="secondary";b.onclick=()=>setApplicationStatus(null,a.worker_id,pair[1],j.id);d.appendChild(b);}}
+   }
+   host.appendChild(d);
+  }
+  return;
+ }
+ let q;
+ if(profile.role==="worker"){
+  q=db.from("job_applications").select("id,status,created_at,jobs(title,wage_inr,work_date,location_text)").eq("worker_id",user.id).order("created_at",{ascending:false});
+ }else if(profile.role==="contractor"){
+  q=db.from("job_applications").select("id,worker_id,status,created_at,jobs!inner(title,wage_inr,work_date,location_text,contractor_id)").eq("jobs.contractor_id",user.id).order("created_at",{ascending:false});
+ }else{host.textContent="इस खाते की भूमिका आवेदन देखने के लिए अधिकृत नहीं है।";return;}
+ const {data,error}=await q;
+ if(error){host.textContent="आवेदन लोड नहीं हुए: "+error.message+" — Supabase की SELECT/RLS policy जाँचें।";return;}
+ if(!data?.length){host.textContent="अभी कोई आवेदन नहीं है।";return;}
+ host.innerHTML="";
+ for(const a of data){const d=document.createElement("div");d.className="job";const j=a.jobs||{};
+  const title=document.createElement("h3");title.textContent=j.title||"काम";
+  const meta=document.createElement("p");meta.className="muted";meta.textContent="₹"+(j.wage_inr||0)+"/दिन · "+(j.work_date||"")+" · स्थिति: "+statusLabel(a.status);
+  d.append(title,meta);
+  if(profile.role==="contractor"){
+   const who=document.createElement("p");who.className="muted";who.textContent="काम दार ID: "+a.worker_id;d.appendChild(who);
+   if(a.status==="pending"){for(const pair of [["Accept करें","accepted"],["Reject करें","rejected"]]){const b=document.createElement("button");b.textContent=pair[0];if(pair[1]!=="accepted")b.className="secondary";b.onclick=()=>setApplicationStatus(a.id,a.worker_id,pair[1],null);d.appendChild(b);}}
+  }
+  host.appendChild(d);
+ }
+}
 $("refreshJobs").onclick=async()=>{if(profile?.role==="worker"){try{coords=await getGPS();const {error}=await db.from("profiles").update({latitude:coords.latitude,longitude:coords.longitude}).eq("id",user.id);if(error){say("लोकेशन अपडेट नहीं हुई: "+error.message,"error");return;}}catch(e){say("लोकेशन नहीं मिली: "+e.message,"error");return;}}await loadJobs();};
 $("logout").onclick=async()=>{if(!demoMode)await db.auth.signOut();demoMode=false;user=null;profile=null;coords=null;show("dashboard",false);show("profileSetup",false);show("demoRole",false);show("auth");show("otpBox",false);say("आप लॉगआउट हो गए हैं।");};
 (async()=>{const {data}=await db.auth.getSession();if(data.session){user=data.session.user;await routeUser();}})();
