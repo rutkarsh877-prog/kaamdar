@@ -40,6 +40,58 @@ button:hover{background:var(--blue2)}button:active{transform:scale(.99)}button.s
 @keyframes workerFloat{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-9px) rotate(-2deg)}}@keyframes workerGlow{0%,100%{filter:drop-shadow(0 7px 5px #10274745)}50%{filter:drop-shadow(0 10px 10px #e9b72f70)}}@keyframes shimmer{0%{background-position:0% 50%}100%{background-position:200% 50%}}.hero-inner{animation:rise .7s ease both}.hero-art{background-size:200% 200%;animation:shimmer 7s ease-in-out infinite alternate}.hero-kicker{animation:rise .6s ease both}.card{animation:rise .45s ease both}@keyframes rise{from{opacity:.75;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:440px){header{padding:15px 15px 16px}header .brand{font-size:23px}header small{font-size:10px}.hero{margin-top:11px;padding:0 10px}.hero-inner{grid-template-columns:minmax(0,1fr) 108px;min-height:150px;border-radius:18px}.hero-copy{padding:15px 3px 15px 13px}.hero-kicker{font-size:9px;padding:5px 7px}.hero h1{font-size:22px;margin:10px 0 6px}.hero p{font-size:12px}.hero-art{min-height:150px}main{padding:8px 10px 20px}.card{padding:14px;border-radius:16px}h2{font-size:18px}#dashboard .dash-hero{padding:18px 100px 18px 14px;min-height:150px;border-radius:18px}#dashboard .dash-hero .eyebrow{font-size:9px;letter-spacing:.45px}#dashboard .dash-hero #welcome{font-size:20px;line-height:1.2}#dashboard .dash-hero #roleLabel{font-size:12px}#dashboard .dash-hero .dash-worker{right:7px;bottom:18px;font-size:52px}.dash-stats{gap:6px}.dash-stat{padding:10px 7px;border-radius:12px}.dash-stat strong{font-size:16px}.dash-stat span{font-size:9px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
+
+/* Premium compact polish: preserve the existing character and core interface */
+:root{--bg:#faf9f5;--line:#ece5d5;--ink:#1d2b40;--muted:#68758a;--blue:#e3ae22;--blue2:#c48c0a;--amber:#ffc84d}
+body{background:#faf9f5}
+header{padding:15px 18px 16px;box-shadow:0 3px 14px #26364a0a}
+.hero{margin-top:12px}
+.hero-inner{min-height:142px;border-color:#eee5d3;box-shadow:0 8px 24px #26364a0a}
+.hero-copy{padding:16px 8px 16px 17px}
+.hero h1{font-size:clamp(22px,4.8vw,27px);letter-spacing:-.45px}
+.hero p{font-size:13px}
+.hero-art{min-height:142px;background:linear-gradient(145deg,#fff4c8,#f3ca58 68%,#e8b22c);clip-path:ellipse(100% 100% at 100% 50%)}
+.hero-art:before{font-size:clamp(53px,11vw,72px);top:18%;right:14%;animation:workerFloat 3.2s ease-in-out infinite}
+.hero-art:after{font-size:10px;padding:6px 9px;box-shadow:0 3px 8px #8b641a20}
+main{padding-top:8px}
+.card{border-color:#ebe5d9;box-shadow:0 5px 20px #26364a08}
+button{background:linear-gradient(135deg,#f5ca55,#e7ae20);color:#34280a;box-shadow:0 4px 10px #c8951320}
+button:hover{background:#e4ae25}
+button.secondary{background:#fff3c9;color:#5d470a}
+button.ghost{background:#f4f1e8;color:#34445a}
+input:focus,select:focus,textarea:focus{border-color:#d5a41b;box-shadow:0 0 0 3px #e9b72f25}
+.status{background:#fff7db;border-color:#f4e2a7;color:#624c12}
+.pill{background:#fff3c7;color:#6a510c}
+.job .pay{color:#087f5b}
+#dashboard .dash-hero{min-height:135px;padding:17px 112px 17px 18px;border:1px solid #f3df9b;background:linear-gradient(115deg,#fffdf5 0%,#fff3c7 62%,#f2c84e 100%);box-shadow:0 8px 24px #8e6c1910}
+#dashboard .dash-hero:after{border-color:#c59b2a22;box-shadow:0 0 0 22px #c59b2a08,0 0 0 44px #c59b2a05}
+#dashboard .dash-hero .eyebrow{color:#7a5b0a}
+#dashboard .dash-hero #welcome{font-size:clamp(20px,4.8vw,24px);color:#1d2b40!important}
+#dashboard .dash-hero #roleLabel{color:#5f512d}
+#dashboard .dash-hero .dash-worker{font-size:54px;right:12px;bottom:15px}
+#dashboard .dash-hero .dash-worker:after{font-size:8px;padding:4px 6px}
+.dash-stats{gap:9px}
+.dash-stat{border-color:#ece5d5;box-shadow:0 3px 12px #26364a05}
+.dash-stat strong{color:#5b4510}
+#dashboard>.card{padding:15px;border-radius:16px}
+#dashboard h2:before{background:#f3bd35}
+#dashboard #contractorPanel{background:#fffdf7;border-color:#eee4cc}
+.footer{color:#7b7b72}
+@media(max-width:440px){
+header{padding:14px 15px}
+.hero{margin-top:10px}
+.hero-inner{grid-template-columns:minmax(0,1fr) 101px;min-height:137px}
+.hero-copy{padding:13px 2px 13px 12px}
+.hero h1{font-size:21px}
+.hero p{font-size:11.5px}
+.hero-art{min-height:137px}
+.hero-art:before{font-size:55px;right:9%;top:20%}
+.hero-art:after{right:6px;bottom:8px;font-size:9px}
+#dashboard .dash-hero{min-height:130px;padding:16px 94px 16px 13px}
+#dashboard .dash-hero .dash-worker{font-size:48px;right:6px;bottom:15px}
+.dash-stats{gap:6px}
+.dash-stat{padding:10px 7px}
+}
 </style>
 </head>
 <body>
