@@ -143,6 +143,16 @@ button.ghost{background:#f1f5f1;border:1px solid #e1e9e2;color:#355346;box-shado
 .dash-stat span{color:#718078;font-weight:700}
 .footer{padding:26px 12px;color:#7a887f}
 @keyframes kdFloat{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-8px) rotate(1deg)}}
+
+/* Motion polish only — keep the approved layout, palette, labels and buttons unchanged */
+@keyframes kdWorkerGlow{0%,100%{filter:drop-shadow(0 9px 7px #164a2c1c) brightness(1)}50%{filter:drop-shadow(0 13px 11px #164a2c35) brightness(1.035)}}
+@keyframes kdHalo{0%,100%{opacity:.52;transform:scale(.96)}50%{opacity:.9;transform:scale(1.04)}}
+.hero-art:before{animation:kdFloat 4s ease-in-out infinite,kdWorkerGlow 4.5s ease-in-out infinite}
+#dashboard .dash-hero .dash-worker{animation:kdFloat 4.2s ease-in-out infinite,kdWorkerGlow 4.8s ease-in-out infinite}
+.hero-art{isolation:isolate}
+.hero-art:after{animation:kdHalo 3.8s ease-in-out infinite}
+@media(prefers-reduced-motion:reduce){.hero-art:before,#dashboard .dash-hero .dash-worker,.hero-art:after{animation:none!important}}
+
 @keyframes kdEnter{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 .hero-inner,.card,#dashboard .dash-hero,.dash-stat{animation:kdEnter .5s cubic-bezier(.2,.75,.25,1) both}
 @media(max-width:470px){header{padding:19px 15px 21px}header .brand{font-size:27px}.hero{margin-top:12px;padding:0 10px}.hero-inner{grid-template-columns:minmax(0,1fr) 116px;min-height:192px;border-radius:22px}.hero-copy{padding:18px 1px 18px 14px}.hero h1{font-size:25px;letter-spacing:-.6px}.hero p{font-size:13px;line-height:1.6}.hero-kicker{font-size:10px;padding:6px 8px}.hero-art{min-height:192px;border-radius:95px 0 0 95px}.hero-art:before{width:108px;height:145px;right:calc(50% - 54px);top:22px}.hero-art:after{font-size:8px;right:4px;bottom:8px;padding:7px 7px}main{padding:8px 10px 26px}.card{padding:16px;border-radius:19px}#dashboard .dash-hero{min-height:185px;padding:21px 112px 21px 16px;border-radius:22px}#dashboard .dash-hero .dash-worker{width:93px;height:112px;right:8px;bottom:17px}#dashboard .dash-hero #welcome{font-size:25px}#dashboard .dash-hero #roleLabel{font-size:13px}.dash-stats{gap:6px}.dash-stat{padding:12px 8px}.dash-stat strong{font-size:18px}.dash-stat span{font-size:11px}}
