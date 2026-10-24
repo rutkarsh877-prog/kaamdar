@@ -279,6 +279,18 @@ button:hover{background:#066c38}button.secondary{background:#e7f6eb;color:#087a4
 @keyframes kdPhotoBob{0%,100%{background-position:center 45%;transform:translateY(0)}50%{background-position:center 49%;transform:translateY(-3px)}}
 @media(max-width:480px){.hero-inner{grid-template-columns:minmax(0,1fr) 135px;min-height:205px}.hero-art{min-height:205px}.hero-copy{padding:18px 4px 18px 15px}.hero h1{font-size:25px}.hero p{font-size:13px}#dashboard .dash-hero{padding:20px 112px 20px 16px;min-height:185px}#dashboard .dash-hero .dash-worker{width:112px;height:137px}.job:before{height:125px}.entry-art{height:29svh;min-height:200px}}
 
+
+.job-profession{padding:13px!important;overflow:hidden}
+.profession-photo{height:180px;border-radius:14px;overflow:hidden;position:relative;margin-bottom:14px;background:linear-gradient(135deg,#e8f6ec,#c5e6ce);display:flex;align-items:center;justify-content:center}
+.profession-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.profession-photo .profession-label{position:absolute;left:10px;bottom:10px;background:#fffF;color:#075c34;border-radius:22px;padding:7px 11px;font-size:12px;font-weight:850;box-shadow:0 3px 12px #123d2418}
+.profession-photo.photo-fallback{font-size:42px;color:#075c34;flex-direction:column;gap:8px}
+.job-pills{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 14px}
+.job-profession h3{margin:8px 0 4px;font-size:20px}
+.job-profession .pay{font-size:26px;font-weight:900;margin:8px 0 12px;color:#078343}
+.job-profession .action button{width:100%;margin-top:14px}
+@media(max-width:480px){.profession-photo{height:150px}.job-profession{padding:12px!important}}
+
 </style>
 </head>
 <body class="mode-splash">
@@ -330,6 +342,9 @@ button:hover{background:#066c38}button.secondary{background:#e7f6eb;color:#087a4
 <input id="role" type="hidden" value="worker">
 <label>पूरा नाम</label><input id="fullName" placeholder="अपना नाम">
 <label>जिला</label><select id="district"><option>Amethi</option><option>Sultanpur</option></select>
+<label>ब्लॉक / तहसील</label><select id="profileBlock"><option value="">ब्लॉक चुनें</option></select>
+<label>गाँव / कस्बा / मोहल्ला</label><input id="profileLocality" list="pilotLocalities" placeholder="नाम लिखें या सूची से चुनें" autocomplete="off">
+<datalist id="pilotLocalities"></datalist><p class="muted">अपने गाँव, मजरे, वार्ड या मोहल्ले का नाम लिख सकते हैं—सूची में न हो तब भी। GPS अनुमति मिलने पर नज़दीकी काम दूरी के आधार पर मिलेंगे।</p>
 <div id="skillsWrap"><label>आप कौन-सा काम कर सकते हैं?</label><select id="skills"><option value="">काम चुनें</option><option>राजमिस्त्री</option><option>मजदूर</option><option>बढ़ई</option><option>प्लंबर</option><option>इलेक्ट्रीशियन</option><option>पेंटर</option><option>वेल्डर</option><option>कृषि कार्य</option><option>ड्राइवर</option><option>अन्य</option></select></div>
 <button id="getLocation" class="secondary">मेरी लोकेशन लें</button><div id="locStatus" class="muted">लोकेशन केवल अनुमति देने पर मिलेगी।</div>
 <button id="saveProfile">प्रोफाइल सेव करें</button>
@@ -345,7 +360,9 @@ button:hover{background:#066c38}button.secondary{background:#e7f6eb;color:#087a4
 <label>काम का प्रकार</label><select id="jobSkill"><option>मजदूर</option><option>राजमिस्त्री</option><option>बढ़ई</option><option>प्लंबर</option><option>इलेक्ट्रीशियन</option><option>पेंटर</option><option>वेल्डर</option><option>कृषि कार्य</option><option>ड्राइवर</option><option>अन्य</option></select>
 <div class="row"><div><label>कितने लोग चाहिए?</label><input id="workersNeeded" type="number" min="1" max="100" value="1"></div><div><label>मजदूरी (₹ प्रति दिन)</label><input id="wage" type="number" min="0" value="500"></div></div>
 <div class="row"><div><label>काम की तारीख</label><input id="workDate" type="date"></div><div><label>जिला</label><select id="jobDistrict"><option>Amethi</option><option>Sultanpur</option></select></div></div>
-<label>काम की जगह / गाँव / मोहल्ला</label><input id="jobLocation" placeholder="गाँव, मोहल्ला या landmark">
+<label>ब्लॉक / तहसील</label><select id="jobBlock"><option value="">ब्लॉक चुनें</option></select>
+<label>काम की जगह / गाँव / कस्बा / मोहल्ला</label><input id="jobLocality" list="pilotLocalities" placeholder="गाँव या मोहल्ले का नाम लिखें" autocomplete="off">
+<label>नज़दीकी पहचान (वैकल्पिक)</label><input id="jobLocation" placeholder="जैसे स्कूल के पास, मुख्य सड़क">
 <label>काम की जगह का अक्षांश (GPS)</label><input id="jobLat" type="number" step="any" placeholder="लोकेशन बटन दबाएँ">
 <label>काम की जगह का देशांतर (GPS)</label><input id="jobLng" type="number" step="any" placeholder="लोकेशन बटन दबाएँ">
 <label>विवरण (वैकल्पिक)</label><textarea id="jobDescription" rows="2" placeholder="काम की छोटी जानकारी"></textarea>
@@ -366,6 +383,24 @@ const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 const $ = id => document.getElementById(id);
 let user=null, profile=null, coords=null, demoMode=false;
 let demoJobs=[{id:"demo-1",contractor_id:"demo-contractor",title:"2 राजमिस्त्री चाहिए",description:"घर की दीवार का काम",skill:"राजमिस्त्री",workers_needed:2,wage_inr:700,work_date:dateToday(),district:"Amethi",location_text:"गौरीगंज, अमेठी",latitude:26.205,longitude:81.789,status:"open",applications:[]},{id:"demo-2",contractor_id:"demo-contractor",title:"खेत में काम के लिए मजदूर",description:"सुबह 8 बजे पहुँचना है",skill:"मजदूर",workers_needed:4,wage_inr:450,work_date:dateToday(),district:"Amethi",location_text:"जामो रोड, अमेठी",latitude:26.17,longitude:81.76,status:"open",applications:[]}];
+
+const pilotBlocks={
+ Amethi:["गौरीगंज","जामो","जगदीशपुर","मुसाफिरखाना","तिलोई","शुकुल बाजार","भादर","संग्रामपुर","अमेठी","बाजार शुकुल"],
+ Sultanpur:["सुल्तानपुर सदर","लम्भुआ","कादीपुर","जयसिंहपुर","बल्दीराय","दोस्तपुर","कुड़वार","धनपतगंज","अखंडनगर","करौंदी कला","मोतिगरपुर"]
+};
+const pilotLocalities=[
+ "गौरीगंज","जामो","जगदीशपुर","मुसाफिरखाना","तिलोई","शुकुल बाजार","भादर","संग्रामपुर","अमेठी","फुरसतगंज","बाजार शुकुल",
+ "सुल्तानपुर","लम्भुआ","कादीपुर","जयसिंहपुर","बल्दीराय","दोस्तपुर","कुड़वार","धनपतगंज","अखंडनगर","करौंदी कला","मोतिगरपुर","कोइरीपुर","चांदा"
+];
+function fillPilotLocations(){
+ const district=$("district")?.value||$("jobDistrict")?.value||"Amethi";
+ const fill=(id,items,placeholder)=>{const el=$(id);if(!el)return;const previous=el.value;el.innerHTML='<option value="">'+placeholder+'</option>'+items.map(x=>'<option></option>').join("");[...el.options].slice(1).forEach((o,i)=>o.value=o.textContent=items[i]);if(items.includes(previous))el.value=previous;};
+ fill("profileBlock",pilotBlocks[$("district")?.value||"Amethi"]||[],"ब्लॉक चुनें");
+ fill("jobBlock",pilotBlocks[$("jobDistrict")?.value||"Amethi"]||[],"ब्लॉक चुनें");
+ const dl=$("pilotLocalities");if(dl)dl.innerHTML=pilotLocalities.map(x=>'<option></option>').join("");
+ if(dl)[...dl.options].forEach((o,i)=>o.value=o.textContent=pilotLocalities[i]);
+}
+$("district")?.addEventListener("change",fillPilotLocations);$("jobDistrict")?.addEventListener("change",fillPilotLocations);fillPilotLocations();
 function say(msg,type=""){const n=$("notice");n.textContent=msg;n.className="status "+type+(msg?"":" hidden");}
 function show(id,on=true){$(id).classList.toggle("hidden",!on);}
 function dateToday(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;}
@@ -395,7 +430,37 @@ async function routeUser(){document.body.className="mode-dashboard";show("kaamSp
 $("saveProfile").onclick=async()=>{if(!user){say("पहले OTP से लॉगिन करें।","error");return;}const role=$("role").value,name=$("fullName").value.trim(),district=$("district").value,skill=$("skills").value;if(!name){say("अपना नाम भरें।","error");return;}if(role==="worker"&&!skill){say("अपना काम चुनें।","error");return;}if(!coords){try{coords=await getGPS();}catch(e){say("आगे बढ़ने से पहले लोकेशन की अनुमति दें। "+e.message,"error");return;}}const payload={id:user.id,role,full_name:name,phone:user.phone||$("phone").value.trim(),district,skills:role==="worker"?[skill]:[],latitude:coords.latitude,longitude:coords.longitude};const {error}=await db.from("profiles").insert(payload);if(error){say("प्रोफाइल सेव नहीं हुई: "+error.message,"error");return;}say("प्रोफाइल सेव हो गई।","ok");await routeUser();};
 $("postJob").onclick=async()=>{if(!profile||profile.role!=="contractor")return;const title=$("jobTitle").value.trim(),lat=Number($("jobLat").value),lng=Number($("jobLng").value),needed=Number($("workersNeeded").value),wage=Number($("wage").value),date=$("workDate").value,loc=$("jobLocation").value.trim();if(!title||!loc||!date||!Number.isFinite(lat)||!Number.isFinite(lng)||!$("jobLat").value||!$("jobLng").value){say("काम का नाम, जगह, तारीख और GPS coordinates भरें।","error");return;}if(needed<1||needed>100||wage<0||date<dateToday()||!["Amethi","Sultanpur"].includes($("jobDistrict").value)){say("कृपया लोगों की संख्या, मजदूरी, तारीख और जिला सही भरें।","error");return;}const payload={contractor_id:user.id,title,description:$("jobDescription").value.trim(),skill:$("jobSkill").value,workers_needed:needed,wage_inr:wage,work_date:date,district:$("jobDistrict").value,location_text:loc,latitude:lat,longitude:lng,status:"open"};if(demoMode){const demoPayload={...payload,id:"demo-"+Date.now(),applications:[]};demoJobs.unshift(demoPayload);say("","");$("jobTitle").value="";await loadJobs();return;}const {error}=await db.from("jobs").insert(payload);if(error){say("काम पोस्ट नहीं हुआ: "+error.message,"error");return;}say("काम पोस्ट हो गया।","ok");$("jobTitle").value="";await loadJobs();};
 async function loadJobs(){if(!profile)return;const host=$("jobsList");host.innerHTML="<p class='muted'>काम लोड हो रहे हैं…</p>";if(demoMode){let jobs=demoJobs.filter(j=>j.status==="open"&&j.work_date>=dateToday());if(profile.role==="contractor")jobs=demoJobs.filter(j=>j.contractor_id===user.id);else jobs=jobs.filter(j=>j.district===profile.district&&dist(coords.latitude,coords.longitude,j.latitude,j.longitude)<=10).map(j=>({...j,distance:dist(coords.latitude,coords.longitude,j.latitude,j.longitude)}));renderJobs(jobs,host);return;}let q=db.from("jobs").select("*").order("work_date",{ascending:true}).limit(50);if(profile.role==="contractor")q=q.eq("contractor_id",user.id);else q=q.eq("status","open").gte("work_date",dateToday()).eq("district",profile.district);const {data,error}=await q;if(error){host.textContent="काम लोड नहीं हुए: "+error.message;return;}let jobs=data||[];if(profile.role==="worker"&&coords){jobs=jobs.map(j=>({...j,distance:dist(coords.latitude,coords.longitude,j.latitude,j.longitude)})).filter(j=>j.distance<=10).sort((a,b)=>a.distance-b.distance);}if(selectedSkillFilter)jobs=jobs.filter(j=>j.skill===selectedSkillFilter);renderJobs(jobs,host);}
-function renderJobs(jobs,host){if(!jobs.length){host.innerHTML="<p class='muted'>अभी कोई matching काम नहीं मिला। बाद में फिर देखें।</p>";return;}host.innerHTML="";for(const j of jobs){const div=document.createElement("div");div.className="job";const distance=j.distance==null?"":`<span class="pill">${j.distance.toFixed(1)} किमी दूर</span>`;const maps=`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(j.latitude+","+j.longitude)}&travelmode=driving`;div.innerHTML=`<h3></h3><div class="pay"></div><span class="pill"></span><span class="pill"></span><span class="pill"></span>${distance}<p class="muted"></p><a target="_blank" rel="noopener" href="${maps}">Google Maps पर रास्ता देखें</a><div class="action"></div>`;div.querySelector("h3").textContent=j.title;div.querySelector(".pay").textContent="₹"+j.wage_inr+" / दिन";const pills=div.querySelectorAll(".pill");pills[0].textContent=j.skill;pills[1].textContent=j.workers_needed+" लोग चाहिए";pills[2].textContent=j.work_date+" · "+j.district;div.querySelector("p").textContent=j.location_text+(j.description?" — "+j.description:"");if(profile.role==="worker"){const b=document.createElement("button");b.textContent="यह काम स्वीकार करें";b.onclick=()=>applyJob(j.id);div.querySelector(".action").appendChild(b);}host.appendChild(div);}}
+const professionVisuals={
+ "राजमिस्त्री":{label:"राजमिस्त्री",image:"https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=900&q=85",icon:"🧱"},
+ "मजदूर":{label:"निर्माण मजदूर",image:"https://images.unsplash.com/photo-1581092921461-eab62e97a780?auto=format&fit=crop&w=900&q=85",icon:"👷"},
+ "बढ़ई":{label:"बढ़ई",image:"https://images.unsplash.com/photo- woodworking?auto=format&fit=crop&w=900&q=85",icon:"🪚"},
+ "प्लंबर":{label:"प्लंबर",image:"https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=900&q=85",icon:"🔧"},
+ "इलेक्ट्रीशियन":{label:"इलेक्ट्रीशियन",image:"https://images.unsplash.com/photo-1621905251918-48416bd8575a?auto=format&fit=crop&w=900&q=85",icon:"⚡"},
+ "पेंटर":{label:"पेंटर",image:"https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=900&q=85",icon:"🖌️"},
+ "वेल्डर":{label:"वेल्डर",image:"https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=900&q=85",icon:"🧰"},
+ "कृषि कार्य":{label:"कृषि कार्य",image:"https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=900&q=85",icon:"🌾"},
+ "ड्राइवर":{label:"ड्राइवर",image:"https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=900&q=85",icon:"🚚"},
+ "अन्य":{label:"अन्य काम",image:"https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=900&q=85",icon:"🧰"}
+};
+function renderJobs(jobs,host){
+ if(!jobs.length){host.innerHTML="<p class='muted'>अभी कोई matching काम नहीं मिला। लोकेशन और चुने गए काम की श्रेणी जाँचें।</p>";return;}
+ host.innerHTML="";
+ for(const j of jobs){
+  const visual=professionVisuals[j.skill]||professionVisuals["अन्य"];
+  const div=document.createElement("article");div.className="job job-profession";
+  const distance=j.distance==null?"":`<span class="pill">${j.distance.toFixed(1)} किमी दूर</span>`;
+  const coordsOk=Number.isFinite(Number(j.latitude))&&Number.isFinite(Number(j.longitude));
+  const maps=coordsOk?`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(j.latitude+","+j.longitude)}&travelmode=driving`:"https://www.google.com/maps";
+  div.innerHTML=`<div class="profession-photo"><img alt="" loading="lazy"><span class="profession-label"></span></div><h3></h3><div class="pay"></div><div class="job-pills"><span class="pill"></span><span class="pill"></span><span class="pill"></span>${distance}</div><p class="muted"></p><a target="_blank" rel="noopener" href="${maps}">Google Maps पर रास्ता देखें</a><div class="action"></div>`;
+  const img=div.querySelector("img");img.src=visual.image;img.alt=visual.label+" के काम की तस्वीर";img.onerror=()=>{img.remove();div.querySelector(".profession-photo").classList.add("photo-fallback");div.querySelector(".profession-photo").textContent=visual.icon+" "+visual.label;};
+  div.querySelector(".profession-label").textContent=visual.icon+" "+visual.label;
+  div.querySelector("h3").textContent=j.title;div.querySelector(".pay").textContent="₹"+j.wage_inr+" / दिन";
+  const pills=div.querySelectorAll(".job-pills .pill");pills[0].textContent=j.skill;pills[1].textContent=j.workers_needed+" लोग चाहिए";pills[2].textContent=j.work_date+" · "+j.district;
+  div.querySelector("p").textContent=[j.location_text,j.description].filter(Boolean).join(" — ");
+  if(profile.role==="worker"){const b=document.createElement("button");b.textContent="यह काम स्वीकार करें";b.onclick=()=>applyJob(j.id);div.querySelector(".action").appendChild(b);}
+  host.appendChild(div);
+ }
+}
 function dist(lat1,lon1,lat2,lon2){const r=x=>x*Math.PI/180;const dlat=r(lat2-lat1),dlon=r(lon2-lon1);const a=Math.sin(dlat/2)**2+Math.cos(r(lat1))*Math.cos(r(lat2))*Math.sin(dlon/2)**2;return 6371*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));}
 async function applyJob(jobId){if(demoMode){const j=demoJobs.find(x=>x.id===jobId);if(!j){say("डेमो काम नहीं मिला।","error");return;}if(!j.applications)j.applications=[];if(j.applications.includes(user.id)){say("आप इस डेमो काम पर पहले आवेदन कर चुके हैं।","error");return;}j.applications.push(user.id);say("","");await loadJobs();await loadApplications();return;}const {error}=await db.from("job_applications").insert({job_id:jobId,worker_id:user.id,status:"accepted"});if(error){say("काम स्वीकार नहीं हुआ: "+error.message,"error");return;}say("काम स्वीकार करने का आवेदन सेव हो गया।","ok");await loadJobs();await loadApplications();}
 async function loadApplications(){const host=$("myApplications");if(demoMode){const rows=demoJobs.filter(j=>profile.role==="worker"?(j.applications||[]).includes(user.id):j.contractor_id===user.id&&((j.applications||[]).length>0));if(!rows.length){host.textContent="अभी कोई आवेदन नहीं है।";return;}host.innerHTML="";for(const j of rows){const d=document.createElement("div");d.className="job";d.textContent=`${j.title} · ₹${j.wage_inr}/दिन · ${j.work_date} · आवेदन: ${(j.applications||[]).length}`;host.appendChild(d);}return;}let q;if(profile.role==="worker"){q=db.from("job_applications").select("id,status,created_at,jobs(title,wage_inr,work_date,location_text)").eq("worker_id",user.id).order("created_at",{ascending:false});}else{q=db.from("job_applications").select("id,status,created_at,jobs!inner(title,wage_inr,work_date,location_text,contractor_id)").eq("jobs.contractor_id",user.id).order("created_at",{ascending:false});}const {data,error}=await q;if(error){host.textContent="आवेदन लोड नहीं हुए: "+error.message;return;}if(!data?.length){host.textContent="अभी कोई आवेदन नहीं है।";return;}host.innerHTML="";for(const a of data){const d=document.createElement("div");d.className="job";const j=a.jobs||{};d.textContent=`${j.title||"काम"} · ₹${j.wage_inr||0}/दिन · ${j.work_date||""} · स्थिति: ${a.status}`;host.appendChild(d);}}
