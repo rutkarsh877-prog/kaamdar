@@ -93,67 +93,59 @@ header{padding:14px 15px}
 .dash-stat{padding:10px 7px}
 }
 
-/* KAAM DAAR Fresh Visual Preview — isolated branch; existing app logic preserved */
-:root{
-  --navy:#172b3b;--ink:#182b3b;--muted:#697784;--bg:#f7f5ef;
-  --line:#e8e2d5;--yellow:#f2bd38;--yellow-deep:#d99c16;
-  --green:#1d7655;--surface:#fffefa;--shadow:0 12px 30px rgba(31,43,54,.08);
-}
-body{background:radial-gradient(ellipse at 92% 0%,#fff0bf 0,transparent 31%),var(--bg);color:var(--ink)}
-header{background:rgba(255,254,250,.94);border:1px solid #eee6d7;border-top:0;border-radius:0 0 25px 25px;box-shadow:0 8px 26px rgba(35,45,55,.06);padding:18px 20px}
-header .brand{font-size:28px;letter-spacing:-1px;color:#1c2e3a}
-header .brand:before{content:"◈";display:inline-grid;place-items:center;background:var(--yellow);color:#1d2d37;width:36px;height:36px;border-radius:12px;margin-right:10px;font-size:23px;vertical-align:middle;box-shadow:inset 0 -3px 0 #d49b21}
-header small{color:#6b6b5c;font-weight:650;letter-spacing:.2px}
-.hero{max-width:760px;margin:17px auto 0;padding:0 14px}
-.hero-inner{grid-template-columns:minmax(0,1.25fr) minmax(125px,.75fr);min-height:190px;border:1px solid #eee0b9;border-radius:26px;background:linear-gradient(125deg,#fffefa 0%,#fff9e9 60%,#f9e7b0 100%);box-shadow:var(--shadow)}
-.hero-copy{padding:24px 12px 24px 23px}
-.hero-kicker{background:#fff0bd;color:#74510a;border:1px solid #f2d77f;font-size:11px;letter-spacing:.2px}
-.hero h1{font-size:clamp(27px,5vw,35px);letter-spacing:-1.2px;line-height:1.08;margin:14px 0 9px}
-.hero p{font-size:14px;max-width:340px;color:#65717b}
-.hero-art{min-height:190px;clip-path:none;border-radius:95px 0 0 95px;background:radial-gradient(circle at 55% 40%,#ffe9a0 0 28%,transparent 29%),linear-gradient(145deg,#fbeab7,#efbd40 74%,#df9e19)}
-.hero-art:before{content:"👷🏽‍♂️";right:16%;top:15%;font-size:clamp(72px,13vw,104px);filter:drop-shadow(0 12px 8px #5d4a2330);animation:kdFloat 3.8s ease-in-out infinite}
-.hero-art:after{content:"₹0  ·  FREE PILOT";right:12px;bottom:13px;background:#1d3440;color:#fff9e8;font-size:10px;padding:8px 11px;border-radius:10px;box-shadow:0 6px 15px #142a3325}
-main{max-width:760px;padding:11px 14px 32px}
-.card{border:1px solid #e9e4d9;border-radius:22px;background:rgba(255,254,250,.97);box-shadow:0 7px 24px rgba(32,43,53,.045);padding:19px;margin:13px 0}
-h2{font-size:20px;letter-spacing:-.45px;color:#203440}
-h3{color:#263a45}
-label{color:#3a4b55;font-size:13px}
-input,select,textarea{border-radius:13px;border-color:#dedbd1;background:#fffefa;min-height:47px}
+/* KAAM DAAR Visual Redesign V2 — distinctive product identity, original vector character, stronger contrast */
+:root{--navy:#142c3a;--ink:#1b303d;--muted:#667783;--bg:#f5f4ef;--line:#e5e0d5;--yellow:#f4bd3c;--yellow-deep:#d99d18;--green:#1c7555;--surface:#fffefa;--shadow:0 16px 40px rgba(24,43,54,.08)}
+body{background:var(--bg);color:var(--ink);font-family:Inter,"Noto Sans Devanagari",system-ui,sans-serif}
+header{background:#142c3a;color:#fffdf5;border-radius:0 0 26px 26px;padding:23px 21px 26px;box-shadow:0 12px 28px #142c3a20}
+header:before{width:210px;height:210px;border-color:#f4bd3c35;right:-65px;top:-112px;box-shadow:0 0 0 24px #f4bd3c0e,0 0 0 50px #f4bd3c09}
+header .brand{font-size:30px;letter-spacing:-.7px;color:#fffdf5}
+header .brand span{display:inline!important;color:#f4bd3c!important}
+header>div:nth-child(2){color:#f8d987;font-size:14px!important}
+header small{color:#d2dbe0;font-size:12px}
+.hero{margin-top:17px;max-width:780px}
+.hero-inner{min-height:220px;border:1px solid #eadcb6;border-radius:28px;background:linear-gradient(118deg,#fffefa 0%,#fff8e6 63%,#f8e3a5 100%);box-shadow:var(--shadow);grid-template-columns:minmax(0,1fr) minmax(155px,.7fr)}
+.hero-copy{padding:26px 8px 26px 25px}
+.hero-kicker{background:#fff0c2;color:#73530a;border:1px solid #f1d47b;padding:7px 12px;font-size:12px}
+.hero h1{font-size:clamp(27px,5.5vw,38px);letter-spacing:-1px;line-height:1.18;color:#142c3a;margin:16px 0 9px}
+.hero p{font-size:16px;line-height:1.7;color:#5d6d76;max-width:370px}
+.hero-art{position:relative;min-height:220px;border-radius:150px 0 0 150px;background:radial-gradient(circle at 52% 39%,#fff3c8 0 26%,transparent 27%),linear-gradient(145deg,#f8d979,#e7a91f);overflow:hidden}
+.hero-art:before{content:"";position:absolute;width:150px;height:174px;right:calc(50% - 75px);top:21px;background-image:url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20180%20210%22%3E%3Cellipse%20cx%3D%2290%22%20cy%3D%22195%22%20rx%3D%2256%22%20ry%3D%228%22%20fill%3D%22%23203744%22%20opacity%3D%22.12%22%2F%3E%3Cpath%20d%3D%22M38%20180c4-34%2021-50%2052-50s48%2016%2052%2050v7H38z%22%20fill%3D%22%23236c79%22%2F%3E%3Cpath%20d%3D%22M57%20146l13-12%2020%2037%2020-37%2013%2012-13%2041H70z%22%20fill%3D%22%23f4bd3c%22%2F%3E%3Cpath%20d%3D%22M82%20133h16v23H82z%22%20fill%3D%22%238e5d43%22%2F%3E%3Cellipse%20cx%3D%2290%22%20cy%3D%2291%22%20rx%3D%2239%22%20ry%3D%2246%22%20fill%3D%22%23a96f50%22%2F%3E%3Cpath%20d%3D%22M51%2087c-4-29%2011-53%2039-53s43%2024%2039%2053l-9-13-3-18c-17%208-36%208-54%200l-3%2018z%22%20fill%3D%22%234b3429%22%2F%3E%3Cpath%20d%3D%22M39%2066c5-28%2024-43%2051-43s46%2015%2051%2043l-8%208H47z%22%20fill%3D%22%23f4bd3c%22%20stroke%3D%22%23d89b16%22%20stroke-width%3D%223%22%2F%3E%3Cpath%20d%3D%22M79%2024h22l-3%2015H82z%22%20fill%3D%22%23ffda70%22%2F%3E%3Cellipse%20cx%3D%2275%22%20cy%3D%2291%22%20rx%3D%224.5%22%20ry%3D%226%22%20fill%3D%22%23352a27%22%2F%3E%3Cellipse%20cx%3D%22105%22%20cy%3D%2291%22%20rx%3D%224.5%22%20ry%3D%226%22%20fill%3D%22%23352a27%22%2F%3E%3Cpath%20d%3D%22M77%20110q13%2012%2026%200%22%20fill%3D%22none%22%20stroke%3D%22%2358382e%22%20stroke-width%3D%224%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M54%20156l16-14%2020%2029%2020-29%2016%2014-9%2031H63z%22%20fill%3D%22%23f4bd3c%22%2F%3E%3Cpath%20d%3D%22M75%20157h30l-8%2034H83z%22%20fill%3D%22%23e7f2f2%22%2F%3E%3Cpath%20d%3D%22M40%20181h100v8H40z%22%20fill%3D%22%231a5967%22%2F%3E%3C%2Fsvg%3E");background-repeat:no-repeat;background-position:center;background-size:contain;filter:drop-shadow(0 12px 9px #5e451c22);animation:kdFloat 4.2s ease-in-out infinite}
+.hero-art:after{content:"PILOT • ₹0";right:14px;bottom:13px;background:#142c3a;color:#fff8e4;font-size:11px;font-weight:850;padding:9px 12px;border-radius:12px;box-shadow:0 8px 18px #142c3a24}
+main{max-width:780px;padding:12px 14px 36px}
+.card{border:1px solid #e7e1d5;border-radius:23px;background:#fffefa;box-shadow:0 8px 24px rgba(24,43,54,.045);padding:21px;margin:14px 0}
+h2{font-size:22px;letter-spacing:-.45px;color:#203642}
+h2:before{background:#f1bd3d}
+p.muted,.muted{color:#6b7b85}
+label{color:#344954;font-size:14px;font-weight:750}
+input,select,textarea{border:1px solid #ded9cc;border-radius:14px;background:#fffefa;min-height:51px;color:#203642}
 input:focus,select:focus,textarea:focus{border-color:#d5a326;box-shadow:0 0 0 4px #f3c84b2a}
-button{min-height:47px;border-radius:13px;background:linear-gradient(135deg,#ffd35c,#efb72f);color:#24313a;font-weight:850;box-shadow:0 5px 12px #d5a32624}
-button:hover{background:linear-gradient(135deg,#ffda75,#e7ab22);transform:translateY(-1px)}
-button.secondary{background:#fff4cf;border:1px solid #f2df9d;color:#654d0b}
-button.ghost{background:#f0eee7;border:1px solid #e6e1d5;color:#354653}
-.tabs button{background:#f7f3e8;color:#5c5c4e;border:1px solid #ebe4d4}
-.tabs button.active{background:#f4c546;color:#24313a;border-color:#e3b431}
-.status{border-radius:14px;padding:13px 15px}
-.job{border-radius:17px;border-color:#e8e1d4;background:#fffefa;padding:15px;box-shadow:0 4px 13px rgba(25,42,50,.035)}
-.job .pay{font-size:23px;color:#1c7653}
+button{min-height:49px;border-radius:14px;background:#f4bd3c;color:#1d303a;font-weight:850;box-shadow:0 6px 14px #d5a32622;transition:transform .18s ease,box-shadow .18s ease,background .18s ease}
+button:hover{background:#ffd56d;transform:translateY(-2px);box-shadow:0 9px 20px #d5a32628}
+button.secondary{background:#fff4d4;border:1px solid #f0dda6;color:#654d0b}
+button.ghost{background:#f1efe8;border:1px solid #e5dfd1;color:#344954;box-shadow:none}
+.tabs button{background:#f7f3e8;color:#5c5c4e;border:1px solid #ebe4d4;box-shadow:none}
+.tabs button.active{background:#f4bd3c;color:#20313b;border-color:#e3b431}
+.status{border-radius:15px;padding:13px 15px}
+.job{border-radius:19px;border-color:#e7e1d5;background:#fffefa;padding:17px;box-shadow:0 6px 17px rgba(25,42,50,.04)}
+.job .pay{font-size:25px;color:#1c7555}
 .pill{background:#fff1c1;color:#70520a;border:1px solid #f4e2a2}
-#dashboard .dash-hero{min-height:170px;padding:23px 140px 23px 22px;border-radius:25px;background:linear-gradient(120deg,#fffdf5,#fff1bf 65%,#f2c346);border:1px solid #efdda2;box-shadow:var(--shadow)}
-#dashboard .dash-hero .eyebrow{color:#7a5b0b;font-size:11px;letter-spacing:1.1px}
-#dashboard .dash-hero #welcome{font-size:clamp(24px,5vw,31px);letter-spacing:-.8px}
-#dashboard .dash-hero #roleLabel{font-size:14px;color:#5f5b4b}
-#dashboard .dash-hero .dash-worker{font-size:74px;right:19px;bottom:22px;filter:drop-shadow(0 10px 7px #8a681b32);animation:kdFloat 3.8s ease-in-out infinite}
-#dashboard .dash-hero .dash-worker:after{background:#1d3440;color:#fff7df;box-shadow:0 4px 10px #1d344024}
-.dash-stat{border-radius:16px;border-color:#e9e2d5;background:#fffefa;box-shadow:0 5px 16px #26364008}
-.dash-stat strong{font-size:20px;color:#75530b}
-#dashboard h2:before{background:#f1bd3d}
+#dashboard .dash-hero{position:relative;min-height:205px;padding:26px 170px 25px 25px;border-radius:27px;background:linear-gradient(118deg,#142c3a 0%,#1d4656 62%,#246b68 100%);border:1px solid #2d5260;box-shadow:var(--shadow);overflow:hidden}
+#dashboard .dash-hero:after{content:"";position:absolute;right:-38px;top:-85px;width:230px;height:230px;border:1px solid #ffffff1f;border-radius:50%;box-shadow:0 0 0 22px #ffffff08,0 0 0 48px #ffffff05}
+#dashboard .dash-hero .eyebrow{position:relative;color:#f4d27c;font-size:12px;font-weight:850;letter-spacing:1px;z-index:1}
+#dashboard .dash-hero #welcome{position:relative;font-size:clamp(25px,5vw,34px);letter-spacing:-.8px;color:#fffdf5;margin:13px 0 8px;z-index:1}
+#dashboard .dash-hero #roleLabel{position:relative;font-size:15px;line-height:1.65;color:#e0e8e9;z-index:1}
+#dashboard .dash-hero .dash-worker{font-size:0;right:18px;bottom:18px;width:135px;height:145px;background-image:url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20180%20210%22%3E%3Cellipse%20cx%3D%2290%22%20cy%3D%22195%22%20rx%3D%2256%22%20ry%3D%228%22%20fill%3D%22%23203744%22%20opacity%3D%22.12%22%2F%3E%3Cpath%20d%3D%22M38%20180c4-34%2021-50%2052-50s48%2016%2052%2050v7H38z%22%20fill%3D%22%23236c79%22%2F%3E%3Cpath%20d%3D%22M57%20146l13-12%2020%2037%2020-37%2013%2012-13%2041H70z%22%20fill%3D%22%23f4bd3c%22%2F%3E%3Cpath%20d%3D%22M82%20133h16v23H82z%22%20fill%3D%22%238e5d43%22%2F%3E%3Cellipse%20cx%3D%2290%22%20cy%3D%2291%22%20rx%3D%2239%22%20ry%3D%2246%22%20fill%3D%22%23a96f50%22%2F%3E%3Cpath%20d%3D%22M51%2087c-4-29%2011-53%2039-53s43%2024%2039%2053l-9-13-3-18c-17%208-36%208-54%200l-3%2018z%22%20fill%3D%22%234b3429%22%2F%3E%3Cpath%20d%3D%22M39%2066c5-28%2024-43%2051-43s46%2015%2051%2043l-8%208H47z%22%20fill%3D%22%23f4bd3c%22%20stroke%3D%22%23d89b16%22%20stroke-width%3D%223%22%2F%3E%3Cpath%20d%3D%22M79%2024h22l-3%2015H82z%22%20fill%3D%22%23ffda70%22%2F%3E%3Cellipse%20cx%3D%2275%22%20cy%3D%2291%22%20rx%3D%224.5%22%20ry%3D%226%22%20fill%3D%22%23352a27%22%2F%3E%3Cellipse%20cx%3D%22105%22%20cy%3D%2291%22%20rx%3D%224.5%22%20ry%3D%226%22%20fill%3D%22%23352a27%22%2F%3E%3Cpath%20d%3D%22M77%20110q13%2012%2026%200%22%20fill%3D%22none%22%20stroke%3D%22%2358382e%22%20stroke-width%3D%224%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M54%20156l16-14%2020%2029%2020-29%2016%2014-9%2031H63z%22%20fill%3D%22%23f4bd3c%22%2F%3E%3Cpath%20d%3D%22M75%20157h30l-8%2034H83z%22%20fill%3D%22%23e7f2f2%22%2F%3E%3Cpath%20d%3D%22M40%20181h100v8H40z%22%20fill%3D%22%231a5967%22%2F%3E%3C%2Fsvg%3E");background-repeat:no-repeat;background-position:center bottom;background-size:contain;z-index:2;filter:drop-shadow(0 10px 8px #071d263d);animation:kdFloat 4s ease-in-out infinite}
+#dashboard .dash-hero .dash-worker:after{content:"₹0 PILOT";position:absolute;right:0;bottom:0;background:#f4bd3c;color:#20313b;font-size:10px;font-weight:900;border-radius:10px;padding:7px 9px;box-shadow:0 5px 13px #071d262c}
+.dash-stats{gap:10px}
+.dash-stat{border-radius:18px;border:1px solid #e8e1d4;background:#fffefa;box-shadow:0 5px 16px #26364008;padding:17px}
+.dash-stat strong{font-size:23px;color:#805a0b}
+.dash-stat span{color:#71808a;font-weight:700}
 .footer{padding:26px 12px;color:#7a7b72}
 @keyframes kdFloat{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-8px) rotate(1deg)}}
-@keyframes kdEnter{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.hero-inner,.card,#dashboard .dash-hero,.dash-stat{animation:kdEnter .55s cubic-bezier(.2,.75,.25,1) both}
-@media(max-width:440px){
- header{padding:15px 14px}header .brand{font-size:24px}header .brand:before{width:31px;height:31px;font-size:19px;margin-right:7px}
- .hero{margin-top:12px;padding:0 10px}.hero-inner{grid-template-columns:minmax(0,1fr) 106px;min-height:163px;border-radius:21px}
- .hero-copy{padding:18px 2px 18px 14px}.hero h1{font-size:24px;letter-spacing:-.7px}.hero p{font-size:12px}
- .hero-art{min-height:163px;border-radius:80px 0 0 80px}.hero-art:before{font-size:61px;right:7%;top:19%}.hero-art:after{font-size:8px;right:5px;bottom:8px;padding:6px 7px}
- main{padding:8px 10px 24px}.card{padding:15px;border-radius:18px}
- #dashboard .dash-hero{min-height:153px;padding:19px 104px 19px 15px;border-radius:21px}
- #dashboard .dash-hero .dash-worker{font-size:55px;right:8px;bottom:20px}
- .dash-stats{gap:6px}.dash-stat{padding:10px 7px}.dash-stat strong{font-size:17px}
-}
-@media(prefers-reduced-motion:reduce){.hero-inner,.card,#dashboard .dash-hero,.dash-stat,.hero-art:before{animation:none!important}}
+@keyframes kdEnter{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.hero-inner,.card,#dashboard .dash-hero,.dash-stat{animation:kdEnter .5s cubic-bezier(.2,.75,.25,1) both}
+@media(max-width:470px){header{padding:20px 16px 23px}header .brand{font-size:27px}.hero{margin-top:13px;padding:0 10px}.hero-inner{grid-template-columns:minmax(0,1fr) 118px;min-height:192px;border-radius:23px}.hero-copy{padding:19px 1px 19px 15px}.hero h1{font-size:26px;letter-spacing:-.65px}.hero p{font-size:13px;line-height:1.6}.hero-kicker{font-size:10px;padding:6px 8px}.hero-art{min-height:192px;border-radius:100px 0 0 100px}.hero-art:before{width:112px;height:145px;right:calc(50% - 56px);top:22px}.hero-art:after{font-size:8px;right:5px;bottom:8px;padding:7px 8px}main{padding:8px 10px 26px}.card{padding:16px;border-radius:19px}#dashboard .dash-hero{min-height:185px;padding:21px 112px 21px 16px;border-radius:23px}#dashboard .dash-hero .dash-worker{width:93px;height:112px;right:8px;bottom:17px}#dashboard .dash-hero #welcome{font-size:25px}#dashboard .dash-hero #roleLabel{font-size:13px}.dash-stats{gap:6px}.dash-stat{padding:12px 8px}.dash-stat strong{font-size:18px}.dash-stat span{font-size:11px}}
+@media(prefers-reduced-motion:reduce){.hero-inner,.card,#dashboard .dash-hero,.dash-stat,.hero-art:before{animation:none!important}button{transition:none!important}}
 
 </style>
 </head>
