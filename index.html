@@ -169,12 +169,99 @@ button.ghost{background:#f1f5f1;border:1px solid #e1e9e2;color:#355346;box-shado
 
 
 
+
+/* KAAM DAAR reference-led mobile entry flow */
+:root{--kd-green:#078344;--kd-green-dark:#075b35;--kd-mint:#e9f7ed;--kd-gold:#f7bd36}
+body.mode-splash,body.mode-onboarding{background:#f8fbf8}
+body.mode-splash>header,body.mode-splash>.hero,body.mode-splash>main,body.mode-splash>.footer,
+body.mode-onboarding>header,body.mode-onboarding>.hero,body.mode-onboarding>main,body.mode-onboarding>.footer{display:none!important}
+body.mode-auth>header,body.mode-auth>.hero,body.mode-role>header,body.mode-role>.hero,
+body.mode-dashboard>header,body.mode-dashboard>.hero{display:none!important}
+body.mode-auth>main,body.mode-role>main{padding-top:18px;min-height:70vh}
+body.mode-auth #auth,body.mode-role #demoRole{max-width:520px;margin:0 auto;border-radius:24px;padding:24px 20px}
+body.mode-auth #auth h2,body.mode-role #demoRole h2{font-size:27px}
+body.mode-auth #auth button,body.mode-role #demoRole button{min-height:54px;border-radius:15px}
+body.mode-auth #auth #openDemo{background:#e7f6eb;color:#087a42}
+body.mode-role #demoRole .tabs{grid-template-columns:1fr;gap:12px}
+body.mode-role #demoRole .tabs button{background:#fff;border:1px solid #d9e8dd;color:#183a2a;text-align:left;padding:16px 18px;min-height:100px}
+body.mode-role #demoRole .tabs button:before{display:block;font-size:30px;margin-bottom:6px}
+body.mode-role #demoWorker:before{content:"👷🏽‍♂️"}
+body.mode-role #demoContractor:before{content:"🦺"}
+body.mode-dashboard #dashboard{padding-bottom:86px}
+body.mode-dashboard #dashboard .dash-hero{background:linear-gradient(120deg,#075a38,#078344);color:#fff}
+body.mode-dashboard #dashboard .dash-hero .eyebrow{color:#c8f3d5}
+body.mode-dashboard #dashboard .dash-hero #welcome{color:#fff!important}
+body.mode-dashboard #dashboard .dash-hero #roleLabel{color:#e4f7e9}
+body.mode-dashboard #dashboard .dash-stats .dash-stat strong{color:#087a42}
+.entry-screen{min-height:100svh;max-width:620px;margin:0 auto;padding:26px 23px 22px;display:flex;flex-direction:column;overflow:hidden;background:linear-gradient(155deg,#fff 0%,#f5fbf6 65%,#e7f5eb 100%);position:relative}
+.entry-brand{display:flex;align-items:center;gap:11px;position:relative;z-index:2}
+.entry-mark{width:48px;height:48px;border-radius:15px;background:#078344;color:#ffcf46;display:grid;place-items:center;font-size:27px;box-shadow:0 8px 20px #087a4225}
+.entry-brand strong{font-size:29px;line-height:1;font-weight:950;letter-spacing:-1px;color:#093e2b}
+.entry-brand em{font-style:normal;color:#f2b323}
+.entry-brand small{display:block;font-size:12px;color:#385a49;font-weight:650;margin-top:5px}
+.entry-art{height:34svh;min-height:225px;max-height:320px;margin:24px -23px 15px;position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% 75%,#c5e9cd 0%,#e8f7eb 43%,#f9fdf9 75%)}
+.entry-art:before{content:"";position:absolute;width:250px;height:250px;right:-55px;top:-65px;border-radius:50%;background:#c9ebd2}
+.entry-art:after{content:"";position:absolute;width:190px;height:190px;left:-72px;bottom:-116px;border-radius:50%;background:#e2f3e6}
+.entry-art .hero-art{position:absolute;inset:0;background:transparent;clip-path:none;z-index:1}
+.entry-art .hero-art:before{width:85%;height:100%;right:6%;top:0;background-size:contain;background-position:center bottom;animation:kdCharacterIdle 3.6s ease-in-out infinite,kdCharacterLight 5s ease-in-out infinite}
+.entry-art .hero-art:after{content:"";display:none}
+.entry-copy{position:relative;z-index:2}
+.entry-kicker{display:inline-flex;background:#e6f6eb;color:#087a42;border:1px solid #c4e8cf;border-radius:30px;padding:7px 12px;font-size:12px;font-weight:850}
+.entry-copy h1{font-size:clamp(29px,8vw,39px);line-height:1.15;letter-spacing:-1.1px;color:#103d2b;margin:15px 0 10px}
+.entry-copy p{font-size:16px;line-height:1.65;color:#687f70;margin:0}
+.entry-dots{display:flex;justify-content:center;gap:7px;margin:18px 0 15px}
+.entry-dots i{width:7px;height:7px;background:#c9d9ce;border-radius:9px;display:block}
+.entry-dots i.active{width:23px;background:#078344}
+.entry-primary{width:100%;min-height:56px;margin:0;background:#078344;color:#fff;border-radius:17px;font-size:17px;box-shadow:0 9px 22px #07834428;display:flex;align-items:center;justify-content:center;gap:12px}
+.entry-primary span{font-size:24px;font-weight:500}
+.entry-free{text-align:center;color:#718578;font-size:11px;font-weight:750;margin:13px 0 0}
+.entry-skip{width:auto;align-self:flex-end;background:#e8f5eb;color:#087a42;box-shadow:none;padding:9px 15px;min-height:38px;margin:0;border-radius:20px}
+.entry-benefits{display:grid;gap:10px;margin-top:19px}
+.entry-benefits div{display:flex;align-items:center;gap:10px;color:#315a43;font-size:14px;font-weight:750}
+.entry-benefits b{width:25px;height:25px;border-radius:50%;display:grid;place-items:center;background:#d8f2df;color:#078344}
+.onboarding-art{margin-top:12px}
+.orbit{position:absolute;border:1px solid #8ccda0;border-radius:50%;z-index:1;animation:kdHalo 4s ease-in-out infinite}
+.orbit-one{width:220px;height:220px;left:calc(50% - 110px);top:15px}
+.orbit-two{width:270px;height:270px;left:calc(50% - 135px);top:-10px;animation-delay:.7s}
+#kaamBottomNav{position:fixed;z-index:20;bottom:0;left:0;right:0;display:none;grid-template-columns:repeat(5,1fr);gap:0;background:#fff;border-top:1px solid #e1ece4;padding:7px max(8px,env(safe-area-inset-right)) calc(7px + env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left));box-shadow:0 -8px 22px #123d2410}
+body.mode-dashboard #kaamBottomNav{display:grid}
+#kaamBottomNav button{margin:0;min-height:52px;background:transparent;color:#829187;box-shadow:none;border-radius:12px;padding:5px 2px;font-size:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+#kaamBottomNav button span{font-size:20px;line-height:1.2}
+#kaamBottomNav button.active{color:#078344;background:#eaf7ed}
+#kaamBottomNav button.active strong{font-weight:900}
+@media(min-width:600px){.entry-screen{min-height:850px;border-radius:28px;margin:20px auto;box-shadow:0 15px 55px #153b2512}.entry-art{height:300px}.entry-copy h1{font-size:40px}}
+@media(prefers-reduced-motion:reduce){.entry-art .hero-art:before,.orbit{animation:none!important}}
+
 </style>
 </head>
-<body>
+<body class="mode-splash">
+<section id="kaamSplash" class="entry-screen">
+  <div class="entry-brand"><span class="entry-mark">⚒</span><div><strong>KAAM <em>DAAR</em></strong><small>Kaam aasaan. Rozgaar aasaan.</small></div></div>
+  <div class="entry-art"><div class="hero-art" role="img" aria-label="KAAM DAAR worker illustration"></div><span class="entry-leaf leaf-one"></span><span class="entry-leaf leaf-two"></span></div>
+  <div class="entry-copy"><span class="entry-kicker">अमेठी · सुल्तानपुर पायलट</span><h1>जहाँ काम, वहाँ कामदार।</h1><p>अपने आसपास के लोगों से मदद माँगें और भरोसेमंद कामगार आसानी से ढूँढें।</p></div>
+  <div class="entry-dots"><i class="active"></i><i></i><i></i></div>
+  <button id="startOnboarding" class="entry-primary">शुरू करें <span>→</span></button>
+  <p class="entry-free">₹0 प्लेटफ़ॉर्म शुल्क · 100% FREE PILOT</p>
+</section>
+<section id="kaamOnboarding" class="entry-screen hidden">
+  <button id="skipOnboarding" class="entry-skip">छोड़ें</button>
+  <div class="entry-art onboarding-art"><div class="hero-art" role="img" aria-label="KAAM DAAR worker illustration"></div><span class="orbit orbit-one"></span><span class="orbit orbit-two"></span></div>
+  <div class="entry-copy"><span class="entry-kicker">KAAM DAAR · हुनर से रोज़गार तक</span><h1>अपने आसपास के काम से जुड़ें।</h1><p>काम पोस्ट करें, नज़दीकी कामगार खोजें और काम की जानकारी एक ही जगह पाएँ।</p>
+  <div class="entry-benefits"><div><b>✓</b><span>आपके पास के लोग</span></div><div><b>✓</b><span>भरोसेमंद कामगार</span></div><div><b>✓</b><span>पायलट में कोई शुल्क नहीं</span></div></div></div>
+  <div class="entry-dots"><i></i><i class="active"></i><i></i></div>
+  <button id="continueToLogin" class="entry-primary">आगे बढ़ें <span>→</span></button>
+</section>
 <header><div class="brand">काम दार <span style="font-size:14px;color:#d5a21d">●</span></div>
 <div style="font-size:14px;margin-top:4px">Hunar se rozgaar tak</div>
 <small>A TECHZO Product · TECHZO Digital Technologies Pvt. Ltd.</small></header>
+<nav id="kaamBottomNav" aria-label="मुख्य नेविगेशन">
+<button class="active" data-nav="home"><span>⌂</span><strong>होम</strong></button>
+<button data-nav="work"><span>▣</span><strong>काम</strong></button>
+<button data-nav="chat"><span>☏</span><strong>चैट</strong></button>
+<button data-nav="earnings"><span>₹</span><strong>कमाई</strong></button>
+<button data-nav="profile"><span>♙</span><strong>प्रोफाइल</strong></button>
+</nav>
+
 <section class="hero" aria-label="KAAM DAAR परिचय"><div class="hero-inner"><div class="hero-copy"><span class="hero-kicker">● अमेठी · सुल्तानपुर पायलट</span><h1>हुनर को काम से जोड़ें।</h1><p>नज़दीकी काम खोजें या भरोसे से काम के लिए लोग बुलाएँ।</p></div><div class="hero-art" role="img" aria-label="निर्माण कार्य करते हुए श्रमिक"></div></div></section>
 <main>
 <div id="notice" class="status hidden" aria-live="polite"></div>
@@ -237,14 +324,27 @@ function show(id,on=true){$(id).classList.toggle("hidden",!on);}
 function dateToday(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;}
 $("workDate").min=dateToday();$("workDate").value=dateToday();
 document.querySelectorAll("[data-role-choice]").forEach(b=>b.onclick=()=>{document.querySelectorAll("[data-role-choice]").forEach(x=>x.classList.toggle("active",x===b));$("role").value=b.dataset.roleChoice;show("skillsWrap",b.dataset.roleChoice==="worker");});
-function enterDemo(role){demoMode=true;user={id:role==="worker"?"demo-worker":"demo-contractor",phone:"डेमो मोड"};profile={id:user.id,role,full_name:role==="worker"?"काम दार":"ठेकेदार",phone:"डेमो मोड",district:"Amethi",skills:role==="worker"?["राजमिस्त्री"]:[],latitude:26.2,longitude:81.78};coords={latitude:26.2,longitude:81.78};show("auth",false);show("demoRole",false);show("profileSetup",false);show("dashboard",true);$("welcome").textContent="नमस्ते, "+profile.full_name;$("roleLabel").textContent=role==="worker"?"आपके हुनर के मुताबिक आसपास के काम":"अपनी ज़रूरत के लिए कामगार खोजें";show("contractorPanel",role==="contractor");$("listHeading").textContent=role==="contractor"?"मेरे पोस्ट किए काम":"आपके आसपास के काम";say("","");loadJobs();loadApplications();}
-$("openDemo").onclick=()=>{show("auth",false);show("demoRole",true);say(""," ");};$("demoWorker").onclick=()=>enterDemo("worker");$("demoContractor").onclick=()=>enterDemo("contractor");
+function enterDemo(role){document.body.className="mode-dashboard";show("kaamSplash",false);show("kaamOnboarding",false);demoMode=true;user={id:role==="worker"?"demo-worker":"demo-contractor",phone:"डेमो मोड"};profile={id:user.id,role,full_name:role==="worker"?"काम दार":"ठेकेदार",phone:"डेमो मोड",district:"Amethi",skills:role==="worker"?["राजमिस्त्री"]:[],latitude:26.2,longitude:81.78};coords={latitude:26.2,longitude:81.78};show("auth",false);show("demoRole",false);show("profileSetup",false);show("dashboard",true);$("welcome").textContent="नमस्ते, "+profile.full_name;$("roleLabel").textContent=role==="worker"?"आपके हुनर के मुताबिक आसपास के काम":"अपनी ज़रूरत के लिए कामगार खोजें";show("contractorPanel",role==="contractor");$("listHeading").textContent=role==="contractor"?"मेरे पोस्ट किए काम":"आपके आसपास के काम";say("","");loadJobs();loadApplications();}
+$("startOnboarding").onclick=()=>{document.body.className="mode-onboarding";show("kaamSplash",false);show("kaamOnboarding",true);};
+function openLogin(){document.body.className="mode-auth";show("kaamSplash",false);show("kaamOnboarding",false);show("auth",true);show("demoRole",false);show("profileSetup",false);show("dashboard",false);say("","");}
+$("continueToLogin").onclick=openLogin;$("skipOnboarding").onclick=openLogin;
+$("openDemo").onclick=()=>{document.body.className="mode-role";show("auth",false);show("demoRole",true);say("","");};
+$("demoWorker").onclick=()=>enterDemo("worker");$("demoContractor").onclick=()=>enterDemo("contractor");
+document.querySelectorAll("#kaamBottomNav [data-nav]").forEach(b=>b.addEventListener("click",()=>{
+ document.querySelectorAll("#kaamBottomNav [data-nav]").forEach(x=>x.classList.toggle("active",x===b));
+ const dest=b.dataset.nav;
+ if(dest==="home"){ $("jobsList").scrollIntoView({behavior:"smooth",block:"start"}); }
+ else if(dest==="work"){ if(profile?.role==="contractor"){show("contractorPanel",true);$("contractorPanel").scrollIntoView({behavior:"smooth",block:"start"});}else{$("jobsList").scrollIntoView({behavior:"smooth",block:"start"});} }
+ else if(dest==="chat"){say("चैट स्क्रीन अभी demo में उपलब्ध नहीं है। इसे आगे के चरण में जोड़ा जाएगा।","ok");window.scrollTo({top:0,behavior:"smooth"});}
+ else if(dest==="earnings"){say("कमाई और इतिहास स्क्रीन अभी बननी बाकी है।","ok");window.scrollTo({top:0,behavior:"smooth"});}
+ else if(dest==="profile"){document.getElementById("logout").scrollIntoView({behavior:"smooth",block:"center"});}
+}));
 function getGPS(){return new Promise((resolve,reject)=>{if(!navigator.geolocation)return reject(Error("इस ब्राउज़र में GPS उपलब्ध नहीं है।"));navigator.geolocation.getCurrentPosition(p=>resolve({latitude:p.coords.latitude,longitude:p.coords.longitude}),e=>reject(Error(e.message)),{enableHighAccuracy:true,timeout:15000,maximumAge:60000});});}
 $("getLocation").onclick=async()=>{try{coords=await getGPS();$("locStatus").textContent=`लोकेशन मिली: ${coords.latitude.toFixed(5)}, ${coords.longitude.toFixed(5)}`;say("लोकेशन मिल गई। प्रोफाइल सेव करें।","ok");}catch(e){say("लोकेशन नहीं मिली: "+e.message,"error");}};
 $("useJobLocation").onclick=async()=>{try{const c=await getGPS();$("jobLat").value=c.latitude;$("jobLng").value=c.longitude;say("काम की जगह के coordinates भर दिए गए।","ok");}catch(e){say("लोकेशन नहीं मिली: "+e.message,"error");}};
 $("sendOtp").onclick=async()=>{const phone=$("phone").value.trim();if(!/^\+[1-9]\d{7,14}$/.test(phone)){say("मोबाइल नंबर country code के साथ लिखें, जैसे +919876543210","error");return;}const {error}=await db.auth.signInWithOtp({phone});if(error){say("OTP नहीं भेजा गया: "+error.message+" — Supabase में Phone Auth/SMS provider सेटिंग जाँचें।","error");return;}show("otpBox");say("OTP भेजने का अनुरोध सफल हुआ। SMS में आया कोड भरें।","ok");};
 $("verifyOtp").onclick=async()=>{const phone=$("phone").value.trim(),token=$("otp").value.trim();const {data,error}=await db.auth.verifyOtp({phone,token,type:"sms"});if(error){say("OTP verify नहीं हुआ: "+error.message,"error");return;}user=data.user;await routeUser();};
-async function routeUser(){const {data,error}=await db.from("profiles").select("*").eq("id",user.id).maybeSingle();if(error){say("Profile पढ़ने में समस्या: "+error.message,"error");return;}if(!data){show("auth",false);show("dashboard",false);show("profileSetup");return;}profile=data;coords=(data.latitude!=null&&data.longitude!=null)?{latitude:data.latitude,longitude:data.longitude}:null;show("auth",false);show("profileSetup",false);show("dashboard");$("welcome").textContent="नमस्ते, "+data.full_name;$("roleLabel").textContent=data.role==="worker"?"आप काम दार हैं":data.role==="contractor"?"आप ठेकेदार हैं":"एडमिन भूमिका सेट नहीं है";show("contractorPanel",data.role==="contractor");$("listHeading").textContent=data.role==="contractor"?"मेरे पोस्ट किए काम":"आपके आसपास के काम";await loadJobs();await loadApplications();}
+async function routeUser(){document.body.className="mode-dashboard";show("kaamSplash",false);show("kaamOnboarding",false);const {data,error}=await db.from("profiles").select("*").eq("id",user.id).maybeSingle();if(error){say("Profile पढ़ने में समस्या: "+error.message,"error");return;}if(!data){show("auth",false);show("dashboard",false);show("profileSetup");return;}profile=data;coords=(data.latitude!=null&&data.longitude!=null)?{latitude:data.latitude,longitude:data.longitude}:null;show("auth",false);show("profileSetup",false);show("dashboard");$("welcome").textContent="नमस्ते, "+data.full_name;$("roleLabel").textContent=data.role==="worker"?"आप काम दार हैं":data.role==="contractor"?"आप ठेकेदार हैं":"एडमिन भूमिका सेट नहीं है";show("contractorPanel",data.role==="contractor");$("listHeading").textContent=data.role==="contractor"?"मेरे पोस्ट किए काम":"आपके आसपास के काम";await loadJobs();await loadApplications();}
 $("saveProfile").onclick=async()=>{if(!user){say("पहले OTP से लॉगिन करें।","error");return;}const role=$("role").value,name=$("fullName").value.trim(),district=$("district").value,skill=$("skills").value;if(!name){say("अपना नाम भरें।","error");return;}if(role==="worker"&&!skill){say("अपना काम चुनें।","error");return;}if(!coords){try{coords=await getGPS();}catch(e){say("आगे बढ़ने से पहले लोकेशन की अनुमति दें। "+e.message,"error");return;}}const payload={id:user.id,role,full_name:name,phone:user.phone||$("phone").value.trim(),district,skills:role==="worker"?[skill]:[],latitude:coords.latitude,longitude:coords.longitude};const {error}=await db.from("profiles").insert(payload);if(error){say("प्रोफाइल सेव नहीं हुई: "+error.message,"error");return;}say("प्रोफाइल सेव हो गई।","ok");await routeUser();};
 $("postJob").onclick=async()=>{if(!profile||profile.role!=="contractor")return;const title=$("jobTitle").value.trim(),lat=Number($("jobLat").value),lng=Number($("jobLng").value),needed=Number($("workersNeeded").value),wage=Number($("wage").value),date=$("workDate").value,loc=$("jobLocation").value.trim();if(!title||!loc||!date||!Number.isFinite(lat)||!Number.isFinite(lng)||!$("jobLat").value||!$("jobLng").value){say("काम का नाम, जगह, तारीख और GPS coordinates भरें।","error");return;}if(needed<1||needed>100||wage<0||date<dateToday()||!["Amethi","Sultanpur"].includes($("jobDistrict").value)){say("कृपया लोगों की संख्या, मजदूरी, तारीख और जिला सही भरें।","error");return;}const payload={contractor_id:user.id,title,description:$("jobDescription").value.trim(),skill:$("jobSkill").value,workers_needed:needed,wage_inr:wage,work_date:date,district:$("jobDistrict").value,location_text:loc,latitude:lat,longitude:lng,status:"open"};if(demoMode){const demoPayload={...payload,id:"demo-"+Date.now(),applications:[]};demoJobs.unshift(demoPayload);say("","");$("jobTitle").value="";await loadJobs();return;}const {error}=await db.from("jobs").insert(payload);if(error){say("काम पोस्ट नहीं हुआ: "+error.message,"error");return;}say("काम पोस्ट हो गया।","ok");$("jobTitle").value="";await loadJobs();};
 async function loadJobs(){if(!profile)return;const host=$("jobsList");host.innerHTML="<p class='muted'>काम लोड हो रहे हैं…</p>";if(demoMode){let jobs=demoJobs.filter(j=>j.status==="open"&&j.work_date>=dateToday());if(profile.role==="contractor")jobs=demoJobs.filter(j=>j.contractor_id===user.id);else jobs=jobs.filter(j=>j.district===profile.district&&dist(coords.latitude,coords.longitude,j.latitude,j.longitude)<=10).map(j=>({...j,distance:dist(coords.latitude,coords.longitude,j.latitude,j.longitude)}));renderJobs(jobs,host);return;}let q=db.from("jobs").select("*").order("work_date",{ascending:true}).limit(50);if(profile.role==="contractor")q=q.eq("contractor_id",user.id);else q=q.eq("status","open").gte("work_date",dateToday()).eq("district",profile.district);const {data,error}=await q;if(error){host.textContent="काम लोड नहीं हुए: "+error.message;return;}let jobs=data||[];if(profile.role==="worker"&&coords){jobs=jobs.map(j=>({...j,distance:dist(coords.latitude,coords.longitude,j.latitude,j.longitude)})).filter(j=>j.distance<=10).sort((a,b)=>a.distance-b.distance);}if(selectedSkillFilter)jobs=jobs.filter(j=>j.skill===selectedSkillFilter);renderJobs(jobs,host);}
@@ -253,7 +353,7 @@ function dist(lat1,lon1,lat2,lon2){const r=x=>x*Math.PI/180;const dlat=r(lat2-la
 async function applyJob(jobId){if(demoMode){const j=demoJobs.find(x=>x.id===jobId);if(!j){say("डेमो काम नहीं मिला।","error");return;}if(!j.applications)j.applications=[];if(j.applications.includes(user.id)){say("आप इस डेमो काम पर पहले आवेदन कर चुके हैं।","error");return;}j.applications.push(user.id);say("","");await loadJobs();await loadApplications();return;}const {error}=await db.from("job_applications").insert({job_id:jobId,worker_id:user.id,status:"accepted"});if(error){say("काम स्वीकार नहीं हुआ: "+error.message,"error");return;}say("काम स्वीकार करने का आवेदन सेव हो गया।","ok");await loadJobs();await loadApplications();}
 async function loadApplications(){const host=$("myApplications");if(demoMode){const rows=demoJobs.filter(j=>profile.role==="worker"?(j.applications||[]).includes(user.id):j.contractor_id===user.id&&((j.applications||[]).length>0));if(!rows.length){host.textContent="अभी कोई आवेदन नहीं है।";return;}host.innerHTML="";for(const j of rows){const d=document.createElement("div");d.className="job";d.textContent=`${j.title} · ₹${j.wage_inr}/दिन · ${j.work_date} · आवेदन: ${(j.applications||[]).length}`;host.appendChild(d);}return;}let q;if(profile.role==="worker"){q=db.from("job_applications").select("id,status,created_at,jobs(title,wage_inr,work_date,location_text)").eq("worker_id",user.id).order("created_at",{ascending:false});}else{q=db.from("job_applications").select("id,status,created_at,jobs!inner(title,wage_inr,work_date,location_text,contractor_id)").eq("jobs.contractor_id",user.id).order("created_at",{ascending:false});}const {data,error}=await q;if(error){host.textContent="आवेदन लोड नहीं हुए: "+error.message;return;}if(!data?.length){host.textContent="अभी कोई आवेदन नहीं है।";return;}host.innerHTML="";for(const a of data){const d=document.createElement("div");d.className="job";const j=a.jobs||{};d.textContent=`${j.title||"काम"} · ₹${j.wage_inr||0}/दिन · ${j.work_date||""} · स्थिति: ${a.status}`;host.appendChild(d);}}
 $("refreshJobs").onclick=async()=>{if(profile?.role==="worker"){try{coords=await getGPS();const {error}=await db.from("profiles").update({latitude:coords.latitude,longitude:coords.longitude}).eq("id",user.id);if(error){say("लोकेशन अपडेट नहीं हुई: "+error.message,"error");return;}}catch(e){say("लोकेशन नहीं मिली: "+e.message,"error");return;}}await loadJobs();};
-$("logout").onclick=async()=>{if(!demoMode)await db.auth.signOut();demoMode=false;user=null;profile=null;coords=null;show("dashboard",false);show("profileSetup",false);show("demoRole",false);show("auth");show("otpBox",false);say("आप लॉगआउट हो गए हैं।");};
+$("logout").onclick=async()=>{if(!demoMode)await db.auth.signOut();demoMode=false;user=null;profile=null;coords=null;document.body.className="mode-auth";document.body.className="mode-auth";show("dashboard",false);show("profileSetup",false);show("demoRole",false);show("auth");show("otpBox",false);say("आप लॉगआउट हो गए हैं।");};
 (async()=>{const {data}=await db.auth.getSession();if(data.session){user=data.session.user;await routeUser();}})();
 </script>
 </body></html>
